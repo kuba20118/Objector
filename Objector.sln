@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objector", "Objector\Objector.csproj", "{92BB636F-6231-4FD1-989F-73DA5BFA091F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objector.API", "Objector\Objector.API.csproj", "{92BB636F-6231-4FD1-989F-73DA5BFA091F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objector.ML", "Objector.ML\Objector.ML.csproj", "{26CD12BE-A49D-43FD-8E5D-3A786888CD0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{92BB636F-6231-4FD1-989F-73DA5BFA091F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92BB636F-6231-4FD1-989F-73DA5BFA091F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92BB636F-6231-4FD1-989F-73DA5BFA091F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26CD12BE-A49D-43FD-8E5D-3A786888CD0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26CD12BE-A49D-43FD-8E5D-3A786888CD0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26CD12BE-A49D-43FD-8E5D-3A786888CD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26CD12BE-A49D-43FD-8E5D-3A786888CD0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Objector.Controllers
+namespace Objector.API.Controllers
 {
     [Route("api/image")]
     [ApiController]
