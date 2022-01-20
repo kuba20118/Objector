@@ -1,17 +1,15 @@
 ﻿using Microsoft.ML;
 using Microsoft.ML.Transforms.Image;
 using Objector.ML.DataModels;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Objector.ML.Config
 {
-    public class CustomVisionModel
+    public class OnnxModelConfigurator
     {
         private readonly MLContext mlContext;
         private readonly ITransformer mlModel;
 
-        public CustomVisionModel(IOnnxModel onnxModel)
+        public OnnxModelConfigurator(IOnnxModel onnxModel)
         {
             mlContext = new MLContext();
             // Model creation and pipeline definition for images needs to run just once,
