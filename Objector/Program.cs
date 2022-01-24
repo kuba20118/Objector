@@ -21,6 +21,7 @@ var onnxModelConfigurator = new OnnxModelConfigurator(new TinyYoloModel(PathExte
 onnxModelConfigurator.SaveMLNetModel(PathExtensions.GetAbsolutePath("ONNX/OnnxModels/TinyYoloModel.zip"));
 
 builder.Services.AddPredictionEnginePool<ImageInputData, TinyYoloPrediction>().FromFile(PathExtensions.GetAbsolutePath("ONNX/OnnxModels/TinyYoloModel.zip"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
