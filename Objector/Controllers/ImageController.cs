@@ -9,16 +9,34 @@ namespace Objector.Controllers
     public class ImageController : ControllerBase
     {
         private readonly IImageMLService _imageMLService;
+        private readonly IImageService _imageService;
 
-        public ImageController(IImageMLService imageMLService)
+        public ImageController(IImageMLService imageMLService, IImageService imageService)
         {
             _imageMLService = imageMLService;
+            _imageService = imageService;
         }
 
         [HttpPost]
         public async Task<IActionResult> IdentifyObjectsAsync([FromForm(Name = "Image")] IFormFile image)
         {
-            return Ok(await _imageMLService.IdentifyObjectsAsync(image, Guid.NewGuid()));
+            return Ok(await _imageMLService.IdentifyObjectsAsync(image));
+        }
+
+        [HttpGet("{guid}")]
+        public async Task<IActionResult> Get(Guid guid)
+        {
+            var image = await _imageService.GetImageAsync(guid);
+
+            return Ok(image);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            List<byte[]> images = await _imageService.GetAllImagesAsync();
+
+            return Ok(images);
         }
     }
 }
