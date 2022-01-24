@@ -1,3 +1,4 @@
+using Microsoft.Extensions.ML;
 using NetCore.AutoRegisterDi;
 using Objector.Extensions;
 using Objector.ML.Config;
@@ -15,15 +16,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.RegisterAssemblyPublicNonGenericClasses(typeof(ObjectDetectionService).Assembly)
     .Where(x => x.Name.EndsWith("Service"))
     .AsPublicImplementedInterfaces();
-//builder.Services.AddTransient<IObjectDetectionService, ObjectDetectionService>();
-//builder.Services.AddTransient<IImageMLService, ImageMLService>();
-
-//_onnxModelFilePath = /*PathExtensions.GetAbsolutePath(Configuration["ONNX/OnnxModels/TinyYolo2_model.onnx"]);*/
-//_mlnetModelFilePath = PathExtensions.GetAbsolutePath(Configuration["MLModel:MLNETModelFilePath"]);
 
 var onnxModelConfigurator = new OnnxModelConfigurator(new TinyYoloModel(PathExtensions.GetAbsolutePath("ONNX/OnnxModels/TinyYolo2_model.onnx")));
 onnxModelConfigurator.SaveMLNetModel(PathExtensions.GetAbsolutePath("ONNX/OnnxModels/TinyYoloModel.zip"));
 
+builder.Services.AddPredictionEnginePool<ImageInputData, TinyYoloPrediction>().FromFile(PathExtensions.GetAbsolutePath("ONNX/OnnxModels/TinyYoloModel.zip"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
