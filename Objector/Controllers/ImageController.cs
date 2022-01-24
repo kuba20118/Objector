@@ -10,16 +10,15 @@ namespace Objector.Controllers
     {
         private readonly IImageMLService _imageMLService;
 
-        public ImageController(            IImageMLService imageMLService            )
-{
+        public ImageController(IImageMLService imageMLService)
+        {
             _imageMLService = imageMLService;
         }
 
         [HttpPost]
         public async Task<IActionResult> IdentifyObjectsAsync([FromForm(Name = "Image")] IFormFile image)
         {
-            await _imageMLService.IdentifyObjects(image, Guid.NewGuid());
-            return Ok(DateTime.Now);
+            return Ok(await _imageMLService.IdentifyObjectsAsync(image, Guid.NewGuid()));
         }
     }
 }

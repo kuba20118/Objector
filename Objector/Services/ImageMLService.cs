@@ -20,7 +20,7 @@ namespace Objector.Services
             _imagesTmpFolder = Path.GetFullPath(@"ImagesTemp");
         }
 
-        public async Task IdentifyObjects(IFormFile imageFile, Guid id)
+        public async Task<byte[]> IdentifyObjectsAsync(IFormFile imageFile)
         {
             try
             {
@@ -59,6 +59,10 @@ namespace Objector.Services
                 result.ImageStringOriginal = imageData;
 
                 //await _imageService.AddImage(id, result);
+
+                return result.Description?.Any() ?? false
+                    ? result.ImageStringProcessed
+                    : null;
 
             }
             catch (Exception e)
