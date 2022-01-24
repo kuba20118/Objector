@@ -3,6 +3,7 @@ using NetCore.AutoRegisterDi;
 using Objector.Extensions;
 using Objector.ML.Config;
 using Objector.ML.DataModels;
+using Objector.Repositories;
 using Objector.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterAssemblyPublicNonGenericClasses(typeof(ObjectDetectionService).Assembly)
     .Where(x => x.Name.EndsWith("Service"))
+    .AsPublicImplementedInterfaces();
+
+builder.Services.RegisterAssemblyPublicNonGenericClasses(typeof(ImagesRepository).Assembly)
+    .Where(x => x.Name.EndsWith("Repository"))
     .AsPublicImplementedInterfaces();
 
 var onnxModelConfigurator = new OnnxModelConfigurator(new TinyYoloModel(PathExtensions.GetAbsolutePath("ONNX/OnnxModels/TinyYolo2_model.onnx")));
