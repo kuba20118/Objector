@@ -9,9 +9,9 @@ namespace Objector.Controllers
     public class ImageController : ControllerBase
     {
         private readonly IImageMLService _imageMLService;
-        private readonly IImageService _imageService;
+        private readonly IImagesService _imageService;
 
-        public ImageController(IImageMLService imageMLService, IImageService imageService)
+        public ImageController(IImageMLService imageMLService, IImagesService imageService)
         {
             _imageMLService = imageMLService;
             _imageService = imageService;
@@ -34,7 +34,7 @@ namespace Objector.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            List<byte[]> images = await _imageService.GetAllImagesAsync();
+            var images = await _imageService.GetAllImagesAsync();
 
             return Ok(images);
         }

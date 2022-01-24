@@ -10,13 +10,14 @@ namespace Objector.Services
     {
         private readonly string _imagesTmpFolder;
         private readonly IObjectDetectionService _objectDetectionService;
-        //private readonly IImageService _imageService;
+        private readonly IImagesService _imagesService;
         private string base64String = string.Empty;
         private long elapsedMs = 0;
-        public ImageMLService(IObjectDetectionService objectDetectionService/*, IImageService imageService*/)
+        public ImageMLService(IObjectDetectionService objectDetectionService, IImagesService imagesService)
         {
             //_imageService = imageService;
             _objectDetectionService = objectDetectionService;
+            _imagesService = imagesService;
             _imagesTmpFolder = Path.GetFullPath(@"ImagesTemp");
         }
 
@@ -29,7 +30,7 @@ namespace Objector.Services
                 //Check that the image is valid
                 byte[] imageData = imageMemoryStream.ToArray();
                 //Convert to Image
-                Image image = Image.FromStream(imageMemoryStream);
+                System.Drawing.Image image = System.Drawing.Image.FromStream(imageMemoryStream);
                 string fileName = string.Format("{0}.Jpeg", image.GetHashCode());
                 string imageFilePath = Path.Combine(_imagesTmpFolder, fileName);
                 ////
@@ -58,7 +59,7 @@ namespace Objector.Services
                 result.ElapsedTime = elapsedMs;
                 result.ImageStringOriginal = imageData;
 
-                //await _imageService.AddImage(id, result);
+                await _imagesService.AddImageAsync(result);
 
                 return result.Description?.Any() ?? false
                     ? result.ImageStringProcessed

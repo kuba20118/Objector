@@ -27,7 +27,7 @@ namespace Objector.Services
 
         public ProcessedImage DrawBoundingBox(string imageFilePath)
         {
-            Image image = Image.FromFile(imageFilePath);
+            System.Drawing.Image image = System.Drawing.Image.FromFile(imageFilePath);
             var descList = new List<string>();
             var originalHeight = image.Height;
             var originalWidth = image.Width;
