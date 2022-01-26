@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using Objector.Models;
 using Objector.Mongo;
 using Objector.Repositories.Interfaces;
@@ -22,22 +23,16 @@ namespace Objector.Repositories
         public async Task AddAsync(ImageX image)
         {
             await _images.InsertOneAsync(image);
-            //await Images.InsertOneAsync(new ImageX
-            //{
-            //    Added = DateTime.UtcNow,
-            //    Description = new List<string> { "test", "test2" },
-            //    Id = Guid.NewGuid()
-            //});
         }
 
-        public Task<IList<ImageX>> GetAllImagesAsync()
+        public async Task<IList<ImageX>> GetAllImagesAsync()
         {
-            throw new NotImplementedException();
+            return await _images.AsQueryable().ToListAsync();
         }
 
-        public Task<ImageX> GetImageAsync(Guid guid)
+        public async Task<ImageX> GetImageAsync(Guid guid)
         {
-            throw new NotImplementedException();
+           return  await _images.AsQueryable().FirstOrDefaultAsync(x => x.Id == guid);
         }
     }
 }

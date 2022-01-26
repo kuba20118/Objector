@@ -4,7 +4,7 @@ using Objector.Services.Interfaces;
 
 namespace Objector.Controllers
 {
-    [Route("api/image")]
+    [Route("api/images")]
     [ApiController]
     public class ImageController : ControllerBase
     {
@@ -32,7 +32,7 @@ namespace Objector.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetImages()
         {
             var images = await _imageService.GetAllImagesAsync();
 
