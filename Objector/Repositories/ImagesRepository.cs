@@ -1,18 +1,33 @@
-﻿using Objector.Models;
+﻿using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using Objector.Models;
+using Objector.Mongo;
 using Objector.Repositories.Interfaces;
 
 namespace Objector.Repositories
 {
     public class ImagesRepository : IImagesRepository
     {
-        public ImagesRepository()
-        {
+        private readonly IMongoCollection<ImageX> _images;
 
+
+        public ImagesRepository(IOptions<MongoSettings> settings)
+        {
+            var mongoClient = new MongoClient(settings.Value.ConnectionString);
+            var mongoDatabase = mongoClient.GetDatabase(settings.Value.Database);
+
+            _images = mongoDatabase.GetCollection<ImageX>("Images");
         }
 
-        public Task AddAsync(ImageX image)
+        public async Task AddAsync(ImageX image)
         {
-            throw new NotImplementedException();
+            await _images.InsertOneAsync(image);
+            //await Images.InsertOneAsync(new ImageX
+            //{
+            //    Added = DateTime.UtcNow,
+            //    Description = new List<string> { "test", "test2" },
+            //    Id = Guid.NewGuid()
+            //});
         }
 
         public Task<IList<ImageX>> GetAllImagesAsync()

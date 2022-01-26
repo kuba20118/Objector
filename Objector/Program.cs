@@ -3,6 +3,7 @@ using NetCore.AutoRegisterDi;
 using Objector.Extensions;
 using Objector.ML.Config;
 using Objector.ML.DataModels;
+using Objector.Mongo;
 using Objector.Repositories;
 using Objector.Services;
 
@@ -21,6 +22,8 @@ builder.Services.RegisterAssemblyPublicNonGenericClasses(typeof(ObjectDetectionS
 builder.Services.RegisterAssemblyPublicNonGenericClasses(typeof(ImagesRepository).Assembly)
     .Where(x => x.Name.EndsWith("Repository"))
     .AsPublicImplementedInterfaces();
+
+builder.Services.Configure<MongoSettings>(builder.Configuration.GetSection("Mongo"));
 
 var onnxModelConfigurator = new OnnxModelConfigurator(new TinyYoloModel(PathExtensions.GetAbsolutePath("ONNX/OnnxModels/TinyYolo2_model.onnx")));
 onnxModelConfigurator.SaveMLNetModel(PathExtensions.GetAbsolutePath("ONNX/OnnxModels/TinyYoloModel.zip"));

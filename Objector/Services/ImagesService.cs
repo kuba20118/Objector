@@ -15,7 +15,7 @@ namespace Objector.Services
         }
 
         public async Task AddImageAsync(Result result)
-{
+        {
             var image = new ImageX(Guid.NewGuid(), result.ImageStringOriginal, result.ImageStringProcessed, result.Description, result.ElapsedTime);
 
             await _imagesRepository.AddAsync(image);

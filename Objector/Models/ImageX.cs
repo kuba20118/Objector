@@ -2,14 +2,14 @@
 {
     public class ImageX
     {
-        public Guid Id { get; protected set; }
-        public byte[] ImageOriginal { get; protected set; }
-        public byte[] ImageProcessed { get; protected set; }
+        public Guid Id { get; set; }
+        public byte[] ImageOriginal { get; set; }
+        public byte[] ImageProcessed { get; set; }
         public IList<string> Description { get; set; }
         public long ElapsedTime { get; set; }
-        public DateTime Added { get; protected set; }
+        public DateTime Added { get; set; }
 
-        protected ImageX()
+        public ImageX()
         {
         }
 
