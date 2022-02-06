@@ -20,7 +20,10 @@ namespace Objector.Controllers
         [HttpPost]
         public async Task<IActionResult> IdentifyObjectsAsync([FromForm(Name = "Image")] IFormFile image)
         {
-            return Ok(await _imageMLService.IdentifyObjectsAsync(image));
+            var guid = await _imageMLService.IdentifyObjectsAsync(image);
+            var result = await _imageService.GetImageAsync(guid);
+
+            return Ok(result);
         }
 
         [HttpGet("{guid}")]

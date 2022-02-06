@@ -14,11 +14,13 @@ namespace Objector.Services
             _imagesRepository = imagesRepository;
         }
 
-        public async Task AddImageAsync(Result result)
+        public async Task<Guid> AddImageAsync(Result result)
         {
             var image = new ImageX(Guid.NewGuid(), result.ImageStringOriginal, result.ImageStringProcessed, result.Description, result.ElapsedTime);
 
             await _imagesRepository.AddAsync(image);
+
+            return image.Id;
         }
 
         public async Task<IList<ImageX>> GetAllImagesAsync()
@@ -26,9 +28,9 @@ namespace Objector.Services
             return await _imagesRepository.GetAllImagesAsync();
         }
 
-        public async Task<ImageX> GetImageAsync(Guid guid)
+        public Task<ImageX> GetImageAsync(Guid guid)
         {
-            return await _imagesRepository.GetImageAsync(guid);
+            return _imagesRepository.GetImageAsync(guid);
         }
     }
 }

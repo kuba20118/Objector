@@ -6,6 +6,6 @@ namespace Objector.Services.Interfaces
     {
         Task<ImageX> GetImageAsync(Guid guid);
         Task<IList<ImageX>> GetAllImagesAsync();
-        Task AddImageAsync(Result result);
+        Task<Guid> AddImageAsync(Result result);
     }
 }

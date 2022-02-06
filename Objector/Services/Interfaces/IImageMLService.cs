@@ -2,6 +2,6 @@
 {
     public interface IImageMLService
     {
-        Task<byte[]> IdentifyObjectsAsync(IFormFile imageFile);
+        Task<Guid> IdentifyObjectsAsync(IFormFile imageFile);
     }
 }

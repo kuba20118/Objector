@@ -11,7 +11,6 @@ namespace Objector.Repositories
     {
         private readonly IMongoCollection<ImageX> _images;
 
-
         public ImagesRepository(IOptions<MongoSettings> settings)
         {
             var mongoClient = new MongoClient(settings.Value.ConnectionString);
@@ -20,19 +19,10 @@ namespace Objector.Repositories
             _images = mongoDatabase.GetCollection<ImageX>("Images");
         }
 
-        public async Task AddAsync(ImageX image)
-        {
-            await _images.InsertOneAsync(image);
-        }
+        public async Task AddAsync(ImageX image) => await _images.InsertOneAsync(image);
 
-        public async Task<IList<ImageX>> GetAllImagesAsync()
-        {
-            return await _images.AsQueryable().ToListAsync();
-        }
+        public async Task<IList<ImageX>> GetAllImagesAsync() => await _images.AsQueryable().ToListAsync();
 
-        public async Task<ImageX> GetImageAsync(Guid guid)
-        {
-           return  await _images.AsQueryable().FirstOrDefaultAsync(x => x.Id == guid);
-        }
+        public async Task<ImageX> GetImageAsync(Guid guid) => await _images.AsQueryable().FirstOrDefaultAsync(x => x.Id == guid);
     }
 }
