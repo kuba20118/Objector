@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
         public Guid ImageId { get; set; }
-        public List<string> FoundObjects { get; set; }
+        public IList<string> FoundObjects { get; set; }
         public Feedback FeedbackFromUser { get; set; }
         public int NumberOfObjectsFound { get; set; }
         public long Time { get; set; }
@@ -16,7 +16,7 @@
 
         }
 
-        public Statistics(Guid imageId, List<string> description, long time, Feedback feedback)
+        public Statistics(Guid imageId, IList<string> description, long time, Feedback feedback)
         {
             FoundObjects = new List<string>();
             Id = Guid.NewGuid();
@@ -38,7 +38,7 @@
             AllMistakes += (CritMistakes + feedback.IncorrectBox + feedback.MultipleFound);
         }
 
-        private void SetFoundObjects(List<string> description)
+        private void SetFoundObjects(IList<string> description)
         {
             if (description.Count == 0 || description == null)
             {
