@@ -4,7 +4,7 @@ Frontend repository can be found here:
 https://github.com/andrzejtenus/projektDomanski/tree/master
 
 ## About
-Application is able to detect objects in pictures.
+Application is able to detect objects from pictures.
 
 User is able to upload his foto to the application and after clasification results are displayed:
 
