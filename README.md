@@ -18,6 +18,15 @@ All answered questions are stored in mongoDB with possibility to aggregate them 
 
 ![image](https://user-images.githubusercontent.com/32637113/153249317-d05a7fa9-9b01-4f17-bd93-d5d4d16385dd.png)
 
+## Used third party libraries
+**Microsoft.ML**
+https://dotnet.microsoft.com/en-us/apps/machinelearning-ai/ml-dotnet
+
+**Autofac**
+https://autofac.org/
+
+**AutoMapper**
+https://automapper.org/
 
 ## Getting started
 ### Requirements
